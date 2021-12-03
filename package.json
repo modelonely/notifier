@@ -1,0 +1,16 @@
+{
+  "name": "notifier",
+  "version": "1.0.0",
+  "description": "for beautiful notifications",
+  "source": "src/index.html",
+  "scripts": {
+    "watch": "parcel src/index.html",
+    "build": "parcel build src/index.html"
+  },
+  "devDependencies": {
+    "@parcel/transformer-sass": "^2.0.1",
+    "parcel": "^2.0.1"
+  },
+  "author": "modelonely",
+  "license": "ISC"
+}

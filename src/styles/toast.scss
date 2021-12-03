@@ -1,0 +1,117 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+#notifier-wrapper {
+  position: fixed;
+  z-index: 100;
+  right: 1rem;
+  bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+
+  @each $aligns in $alignments {
+    &.#{$aligns} {
+      $as: split-str($aligns, '-');
+      bottom: auto;
+      left: auto;
+      right: auto;
+      top: auto;
+
+      @each $align in $as {
+        #{$align}: 1rem !important;
+      }
+
+      > .notifier {
+        @if (str-index($aligns, 'right')) {
+          &:hover {
+            animation: left-to-right-small .7s;
+          }
+
+          &.fade-in {
+            animation: fade-in-right 1s;
+          }
+          
+          &.hide {
+            animation: hide-right 1s;
+          }
+        }
+
+        @if (str-index($aligns, 'left')) {
+          &:hover {
+            animation: right-to-left-small .7s;
+          }
+
+          &.fade-in {
+            animation: fade-in-left 1s;
+          }
+          
+          &.hide {
+            animation: hide-left 1s;
+          }
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 346px) {
+    right: 1rem !important;
+    left: 1rem !important;
+
+    > .notifier {
+      width: auto !important;
+    }
+  }
+
+  * {
+    font-family: 'Poppins', sans-serif;
+  }
+
+
+  > .notifier {
+    background: #323232;
+    padding: 1rem 2rem;
+    color: white;
+    border-radius: 10px;
+    width: var(--nf-toast-width);
+    max-width: var(--nf-toast-width);
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    word-break: break-all;
+
+    &:not(.fade-in):not(.hide):hover {
+      -webkit-box-shadow: 0px 0px 23px 4px #323232a6;
+      -moz-box-shadow: 0px 0px 23px 4px #323232a6;
+      box-shadow: 0px 0px 23px 4px #323232a6;
+      transition: all 0.2s ease-in-out;
+    }
+
+    &:not(:last-child) {
+      margin-bottom: 0.5rem;
+    }
+
+    @each $color in $types {
+      &.#{$color} {
+        background: var(--nf-#{$color});
+
+        &:not(.fade-in):not(.hide):hover {
+          -webkit-box-shadow: 0px 0px 23px 4px var(--nf-#{$color});
+          -moz-box-shadow: 0px 0px 23px 4px var(--nf-#{$color});
+          box-shadow: 0px 0px 23px 4px var(--nf-#{$color});
+        }
+      }
+    }
+
+    p {
+      padding: 0;
+      margin: 0;
+    }
+
+    > .title {
+      font-weight: 600;
+      font-size: 1rem;
+    }
+
+    > .message {
+      font-size: 0.8rem;
+    }
+  }
+}
